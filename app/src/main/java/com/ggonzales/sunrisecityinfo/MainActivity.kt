@@ -16,6 +16,9 @@ import java.lang.Exception
 import java.net.HttpURLConnection
 import java.net.URL
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -70,9 +73,9 @@ class MainActivity : AppCompatActivity() {
                 val cityName = json.getString("name")
                 val timezone = json.getLong("timezone")
 
-                val sunriseDate = java.util.Date(sunrise.toLong() * 1000)
-                val sunSetDate = java.util.Date(sunset.toLong() * 1000)
-                val formatter = SimpleDateFormat("HH:mm:ss")
+                val sunriseDate = LocalDateTime.ofEpochSecond(sunrise+timezone, 0, ZoneOffset.UTC).toLocalTime()
+                val sunSetDate = LocalDateTime.ofEpochSecond(sunset+timezone, 0, ZoneOffset.UTC).toLocalTime()
+                val formatter = DateTimeFormatter.ISO_LOCAL_TIME
                 val sunriseTimeF = formatter.format(sunriseDate)
                 val sunsetTimeF = formatter.format(sunSetDate)
                 cityResultTextView.setText("$cityName, $country:")
