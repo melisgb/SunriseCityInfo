@@ -6,4 +6,7 @@
     <color name="brightGreenColor">#A4C400</color>
     <color name="orangeColor">#F1A30B</color>
     <color name="blueColor">#68D4F8</color>
+    <color name="whiteColor">#FFFFFF</color>
+    <color name="blackColor">#000000</color>
+    <color name="grayColor">#808080</color>
 </resources>
