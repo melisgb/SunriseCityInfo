@@ -1,5 +1,6 @@
 package com.ggonzales.sunrisecityinfo
 
+import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Base64InputStream
@@ -23,13 +24,20 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-
+    var latExtra : Double? = null
+    var longExtra : Double? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
             submitButton.setOnClickListener {
                 getSunset(it)
+            }
+
+            viewMapButton.setOnClickListener {
+                val intent = Intent(this, ViewLocation::class.java)
+                intent.putExtra("latitud", latExtra)
+                intent.putExtra("longitud", longExtra)
+                startActivity(intent)
             }
     }
       //info from API : https://openweathermap.org/current#name
@@ -38,7 +46,6 @@ class MainActivity : AppCompatActivity() {
         val api_key = "bb9e57a4b8922a20495b519ddb81ace3"
         val url = "https://api.openweathermap.org/data/2.5/weather?q=$city&APPID=$api_key"
         MyAsyncTask().execute(url)
-        Toast.makeText(this, "Searching for the info", Toast.LENGTH_SHORT).show()
     }
 
     inner class MyAsyncTask : AsyncTask<String, String, String>() {
@@ -72,6 +79,11 @@ class MainActivity : AppCompatActivity() {
                 val country = sys.getString("country")
                 val cityName = json.getString("name")
                 val timezone = json.getLong("timezone")
+                val coord = json.getJSONObject("coord")
+                val longitude = coord.getDouble("lon")
+                val latitude = coord.getDouble("lat")
+                latExtra = latitude
+                longExtra = longitude
 
                 val sunriseDate = LocalDateTime.ofEpochSecond(sunrise+timezone, 0, ZoneOffset.UTC).toLocalTime()
                 val sunSetDate = LocalDateTime.ofEpochSecond(sunset+timezone, 0, ZoneOffset.UTC).toLocalTime()

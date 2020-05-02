@@ -2,4 +2,6 @@
     <string name="app_name">SunriseCityInfo</string>
     <string name="today_sunrise_and_sunset_in">Today Sunrise and Sunset in</string>
     <string name="get_info_button">Get Info</string>
+    <string name="view_map">Map</string>
+    <string name="title_activity_view_location">LocationMap</string>
 </resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 <!--    when the button is pressed -->
-    <item android:state_pressed="true">
+    <item android:state_pressed="false">
         <shape android:shape="rectangle">
             <solid android:color="@color/darkGreenColor"/>
             <stroke android:width="2dp" android:dashWidth="1pt" android:dashGap="3px" android:color="@color/brightGreenColor" />
@@ -13,7 +13,7 @@
         </shape>
     </item>
 <!--    when the button is pressed -->
-    <item android:state_pressed="false">
+    <item android:state_pressed="true">
         <shape android:shape="rectangle">
             <gradient android:startColor="@color/brightGreenColor" android:endColor="@color/orangeColor"/>
             <stroke android:width="2dp" android:dashWidth="1pt" android:dashGap="3px" android:color="@color/colorPrimary" />
